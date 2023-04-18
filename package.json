@@ -1,5 +1,27 @@
 {
+  "name": "employee-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Janiece-Lewis/employee-tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Janiece-Lewis/employee-tracker/issues"
+  },
+  "homepage": "https://github.com/Janiece-Lewis/employee-tracker#readme",
   "dependencies": {
-    "inquirer": "8.2.4"
+    "console.table": "^0.10.0",
+    "dotenv": "^16.0.3",
+    "inquirer": "^8.2.5",
+    "mysql2": "^3.2.3"
   }
 }
