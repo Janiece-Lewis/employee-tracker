@@ -1,28 +1,29 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
+// const db = require('./config/connection');
 require('console.table');
 require('dotenv').config();
 
 
 // connects to database
-const db = mysql.createConnection(
-    {
-        host: 'localhost',
+// const db = mysql.createConnection(
+//     {
+//         host: 'localhost',
 
-        user: process.env.DB_USER,
-    
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_DATABASE,
-    },
-   
-);
-db.connect((err) => {
-    if (err) throw err;
-    init();
+//         user: process.env.DB_USER,
 
-})
+//         password: process.env.DB_PASSWORD,
+//         database: process.env.DB_DATABASE,
+//     },
 
-// TODO: Create an array of questions for user input
+// );
+// db.connect((err) => {
+//     if (err) throw err;
+//     init();
+
+// })
+
+//  questions for user input
 const questions = [
     {
         type: 'list',
@@ -31,13 +32,13 @@ const questions = [
         choices: ['view all departments', "view all roles", "view all employees", "add a department", "add a role", "add an employee", "update an employee role"]
     },
 
-    
+
 
 ];
 
 
 
-// TODO: Create a function to initialize app
+//  function to initialize app
 function init() {
     inquirer.prompt(questions)
         .then((answers) => {
@@ -45,7 +46,7 @@ function init() {
             // switch for answers
             switch (answers.answer) {
                 case "view all departments":
-                viewDept()
+                    viewDept()
                     break;
                 case "view all roles":
                     viewRoles()
@@ -71,39 +72,52 @@ function init() {
                     console.log('role updated')
                     break;
                 default:
-                //   db.end()
+                    //   db.end()
                     quit()
             }
         })
 }
 
 function viewDept() {
-    db.query('SELECT * FROM department',  (err, results)=> {
+    db.query('SELECT * FROM department', (err, results) => {
         if (err) throw err;
-      
+
         console.table(results);
         init()
-      });
-        
+    });
+
 }
 
 function viewRoles() {
-    db.query('SELECT * FROM role',  (err, results)=> {
+    db.query('SELECT * FROM role', (err, results) => {
         if (err) throw err;
-      
+
         console.table(results);
         init()
-      });
-        
+    });
+
 }
 
 function viewEmployees() {
-    db.query('SELECT * FROM employee',  (err, results)=> {
+    db.query('SELECT * FROM employee', (err, results) => {
         if (err) throw err;
-      
+
         console.table(results);
-       init()
-      });
-        
+        init()
+    });
+
 }
+
+
+// function addDepartment() {
+//     prompt([{ name: 'name', message: 'What dept. would you like to add?' }]).then((res) => {
+//         db.createDepartment(res).then(()=>{
+//         console.log(`added ${res} to the database.`)
+//         })
+//         .then(()=>{
+//             init()
+//         })
+//     })
+
+// }
 
